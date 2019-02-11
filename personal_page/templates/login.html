@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Log In{% endblock %}
+
+{% block content %}
+    <div class="row center">
+        <div class="col s12">
+            <h1>Realizar Login</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <form method="POST" class="col s12">
+            {{ form.hidden_tag() }}
+            <div class="input-field">
+                <i class="material-icons prefix">account_circle</i>
+                {{ form.username(class='validate') }}
+                {{ form.username.label }}
+            </div>
+            <div class="input-field">
+                <i class="material-icons prefix">security</i>
+                {{ form.password(class='validate') }}
+                {{ form.password.label }}
+            </div>
+            <div class="row center">
+                {{ form.submit(class='waves-effect waves-light btn') }}
+            </div>
+        </form>
+    </div>
+{% endblock %}

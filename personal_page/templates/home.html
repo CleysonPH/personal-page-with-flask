@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Sobre Mim{% endblock %}
+
+{% block content %}
+    <!--Inicio do conteudo -->
+    <!-- Cabeçalho -->
+    <div class="row center">
+        <div class="col s12">
+            <h1>Olá Visitantes</h1>
+        </div>
+    </div>
+
+    <!-- Apresentação simples -->
+    <div class="row">
+        <div class="col m6 s12">
+            <p class="flow-text">{{ data.description }}</p>
+        </div>
+
+        <!-- Imagem -->
+        <div class="col m6 s12">
+            <div class="z-depth-1">
+                <img src="{{ data.image }}" alt="Imagem do criador da página" class="responsive-img materialboxed" data-caption="It's me Cleyson">
+            </div>
+        </div>
+    </div>
+    <!--Fim do conteudo -->
+{% endblock %}

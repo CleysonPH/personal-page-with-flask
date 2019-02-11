@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %}Update Account{% endblock %}
+
+{% block content %}
+    <div class="row center">
+        <div class="col s12">
+            <h1>Dados do Usuario</h1>
+        </div>
+    </div>
+
+    <div class="row center">
+        <div class="col m4 s12">
+            <img id="user-img" class="responsive-img materialboxed" src="{{ current_user.image }}" alt="Imagem de perfil do Usuario" data-caption="Imagem de perfil do Usuario">
+        </div>
+        <form method="POST" class="col m8 s12">
+            {{ form.hidden_tag() }}
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">account_circle</i>
+                    {{ form.username(class='validate') }}
+                    {{ form.username.label }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col m6 s12">
+                    <i class="material-icons prefix">email</i>
+                    {{ form.email(class='validate') }}
+                    {{ form.email.label }}
+                </div>
+                <div class="input-field col m6 s12">
+                    <i class="material-icons prefix">image</i>
+                    {{ form.image_link(class='validate', id='img-form') }}
+                    {{ form.image_link.label }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">mode_edit</i>
+                    {{ form.description(class='validate materialize-textarea') }}
+                    {{ form.description.label }}
+                </div>
+            </div>
+            <div class="row center">
+                {{ form.submit(class='waves-effect waves-light btn') }}
+            </div>
+        </form>
+    </div>
+
+    {% block scripts %}
+        <script>
+            img_form = document.getElementById('img-form')
+            img_form.onchange = function(){
+                new_data = img_form.value
+
+                image = document.getElementById('user-img')
+                image.src = new_data
+            }
+        </script>
+    {% endblock %}
+{% endblock %}

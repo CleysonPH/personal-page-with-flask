@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}Cadastrar Curso{% endblock %}
+
+{% block content %}
+    <div class="row center">
+        <div class="col s12">
+            <h1>Cadastrar Novo Curso</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <form method="POST" class="col s12">
+            {{ form.hidden_tag() }}
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">title</i>
+                    {{ form.title(class='validate') }}
+                    {{ form.title.label }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col m6 s12">
+                    <i class="material-icons prefix">image</i>
+                    {{ form.image_link(class='validate') }}
+                    {{ form.image_link.label }}
+                </div>
+                <div class="input-field col m6 s12">
+                    <i class="material-icons prefix">school</i>
+                    {{ form.certification_link(class='validate') }}
+                    {{ form.certification_link.label }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">mode_edit</i>
+                    {{ form.description(class='validate materialize-textarea') }}
+                    {{ form.description.label }}
+                </div>
+            </div>
+            <div class="row center">
+                {{ form.submit(class='waves-effect waves-light btn') }}
+            </div>
+        </form>
+    </div>
+{% endblock %}
