@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import StringField, PasswordField, SubmitField, DateField
 from wtforms.widgets import TextArea
 from wtforms.validators import DataRequired, Email, URL
 
@@ -14,6 +14,7 @@ class CourseForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
     image_link = StringField('Image Link', validators=[DataRequired(), URL(require_tld=True)])
     certification_link = StringField('Certification Link', validators=[DataRequired(), URL(require_tld=True)])
+    conclusion_date = DateField('Conclusion Date', validators=[DataRequired()])
     description = StringField('Description', widget=TextArea(), validators=[DataRequired()])
     submit = SubmitField('Submit')
 

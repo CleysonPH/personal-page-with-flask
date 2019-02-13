@@ -1,5 +1,6 @@
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from datetime import date
 
 from personal_page import db, login_manager
 
@@ -42,3 +43,4 @@ class Course(db.Model):
     title = db.Column(db.String(120), nullable=False)
     description = db.Column(db.Text)
     certification_link = db.Column(db.String(120), nullable=False)
+    conclusion_date = db.Column(db.Date)

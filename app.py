@@ -25,11 +25,14 @@ def courses():
 def add_course():
     form = CourseForm()
     if form.validate_on_submit():
+        print(form.conclusion_date.data, type(form.conclusion_date.data))
+
         course = Course(
             title=form.title.data,
             image=form.image_link.data,
             description=form.description.data,
-            certification_link=form.certification_link.data
+            certification_link=form.certification_link.data,
+            conclusion_date = form.conclusion_date.data
         )
 
         db.session.add(course)
@@ -51,6 +54,7 @@ def edit_course(id):
         course.title = form.title.data
         course.image = form.image_link.data
         course.certification_link = form.certification_link.data
+        course.conclusion_date = form.conclusion_date.data
         course.description = form.description.data
 
         db.session.commit()
@@ -60,6 +64,7 @@ def edit_course(id):
     form.title.data = course.title
     form.image_link.data = course.image
     form.certification_link.data = course.certification_link
+    form.conclusion_date.data = course.conclusion_date
     form.description.data = course.description
 
     return render_template('edit_course.html', form=form, course=course)
@@ -133,4 +138,4 @@ def account():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0')
