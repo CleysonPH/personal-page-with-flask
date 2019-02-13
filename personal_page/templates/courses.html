@@ -31,8 +31,7 @@
 
                         <div class="card-reveal">
                             <span class="card-title activator grey-text text-darken-4">{{ course.title }}<i class="material-icons right">close</i></span>
-                            <h5>Sobre o curso</h5>
-                            <p style="white-space: pre-wrap;">{{ course.description }}</p>
+                            {{ course.description|safe }}
                         </div>
                     </div>
                 </div>

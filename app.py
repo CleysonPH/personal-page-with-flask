@@ -41,11 +41,29 @@ def add_course():
     return render_template('add_course.html', form=form)
 
 
-@app.route('/courses/edit/<int:id>')
+@app.route('/courses/edit/<int:id>', methods=['GET', 'POST'])
 @login_required
 def edit_course(id):
-    flash('To Implement')
-    return redirect(url_for('courses'))
+    form = CourseForm()
+    course = Course.query.filter_by(id=id).first_or_404()
+
+    if form.validate_on_submit():
+        course.title = form.title.data
+        course.image = form.image_link.data
+        course.certification_link = form.certification_link.data
+        course.description = form.description.data
+
+        db.session.commit()
+        flash('Course Updated!')
+
+        return redirect(url_for('courses'))
+    form.title.data = course.title
+    form.image_link.data = course.image
+    form.certification_link.data = course.certification_link
+    form.description.data = course.description
+
+    return render_template('edit_course.html', form=form, course=course)
+
 
 
 @app.route('/courses/delete/<int:id>')
@@ -65,8 +83,9 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
-
-        if user.check_password(form.password.data) and user is not None:
+        if user is None:
+            flash('Login Invalid!')
+        elif user.check_password(form.password.data):
             print(user)
             login_user(user)
             flash('Logged in Successfully!')
@@ -77,6 +96,8 @@ def login():
                 next = url_for('home')
 
             return redirect(next)
+        else:
+            flash('Password Incorrect!')
     return render_template('login.html', form=form)
 
 

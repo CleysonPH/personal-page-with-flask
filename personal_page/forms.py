@@ -15,7 +15,7 @@ class CourseForm(FlaskForm):
     image_link = StringField('Image Link', validators=[DataRequired(), URL(require_tld=True)])
     certification_link = StringField('Certification Link', validators=[DataRequired(), URL(require_tld=True)])
     description = StringField('Description', widget=TextArea(), validators=[DataRequired()])
-    submit = SubmitField('Add Course')
+    submit = SubmitField('Submit')
 
 
 class UpdateUserForm(FlaskForm):

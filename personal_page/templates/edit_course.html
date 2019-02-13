@@ -1,21 +1,21 @@
 {% extends 'base.html' %}
 
 {% block head %}
-    <link href="{{ url_for('static', filename='summernote/summernote-lite.css') }}" rel="stylesheet">
+<link href="{{ url_for('static', filename='summernote/summernote-lite.css') }}" rel="stylesheet">
 {% endblock %}
 
-{% block title %}Add Course{% endblock %}
+{% block title %}Update Course{% endblock %}
 
 {% block content %}
     <div class="row center">
         <div class="col s12">
-            <h1>Cadastrar Novo Curso</h1>
+            <h1>Atualizar Curso</h1>
         </div>
     </div>
 
     <div class="row">
         <div class="col m4 s12">
-            <img id="course-img" class="responsive-img materialboxed" src="https://placekitten.com/500/300" alt="Imagem do curso" data-caption="Imagem do curso">
+            <img id="course-img" class="responsive-img materialboxed" src="{{ course.image }}" alt="Imagem do curso" data-caption="Imagem do curso">
         </div>
         <form method="POST" class="col m8 s12">
             {{ form.hidden_tag() }}
@@ -60,6 +60,7 @@
         <script src="{{ url_for('static', filename='summernote/summernote-lite.min.js') }}"></script>
         <script>
             $(document).ready(function() {
+                let HTMLString = '{{ course.description }}'
                 $('#summernote').summernote({
                     placeholder: '{{ form.description.label }}',
                     height: 300,
