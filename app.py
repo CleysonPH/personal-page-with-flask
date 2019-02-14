@@ -15,7 +15,7 @@ def home():
 
 @app.route('/courses/')
 def courses():
-    courses = Course.query.all()
+    courses = Course.query.order_by(Course.conclusion_date.desc())
 
     return render_template('courses.html', courses=courses)
 
