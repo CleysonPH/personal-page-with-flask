@@ -15,7 +15,7 @@ def home():
 
 @app.route('/courses/')
 def courses():
-    courses = Course.query.order_by(Course.conclusion_date.desc())
+    courses = Course.query.order_by(Course.conclusion_date.desc()).all()
 
     return render_template('courses.html', courses=courses)
 
@@ -23,6 +23,7 @@ def courses():
 @app.route('/courses/add', methods=['GET', 'POST'])
 @login_required
 def add_course():
+    title = 'Add Course'
     form = CourseForm()
     if form.validate_on_submit():
         print(form.conclusion_date.data, type(form.conclusion_date.data))
@@ -41,12 +42,14 @@ def add_course():
         flash('Course added in the database')
 
         return redirect(url_for('add_course'))
-    return render_template('add_course.html', form=form)
+    print(form.conclusion_date.data, type(form.conclusion_date.data))
+    return render_template('course_form.html', title=title, form=form)
 
 
 @app.route('/courses/edit/<int:id>', methods=['GET', 'POST'])
 @login_required
 def edit_course(id):
+    title = 'Update Course'
     form = CourseForm()
     course = Course.query.filter_by(id=id).first_or_404()
 
@@ -67,7 +70,7 @@ def edit_course(id):
     form.conclusion_date.data = course.conclusion_date
     form.description.data = course.description
 
-    return render_template('edit_course.html', form=form, course=course)
+    return render_template('course_form.html', title=title, form=form)
 
 
 
@@ -91,7 +94,6 @@ def login():
         if user is None:
             flash('Login Invalid!')
         elif user.check_password(form.password.data):
-            print(user)
             login_user(user)
             flash('Logged in Successfully!')
 

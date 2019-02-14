@@ -14,7 +14,7 @@ class CourseForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
     image_link = StringField('Image Link', validators=[DataRequired(), URL(require_tld=True)])
     certification_link = StringField('Certification Link', validators=[DataRequired(), URL(require_tld=True)])
-    conclusion_date = DateField('Conclusion Date', validators=[DataRequired()])
+    conclusion_date = DateField('Conclusion Date', validators=[DataRequired()] ,format='%d/%m/%Y')
     description = StringField('Description', widget=TextArea(), validators=[DataRequired()])
     submit = SubmitField('Submit')
 
