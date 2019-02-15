@@ -14,14 +14,15 @@
 {% block content %}
     <!-- Inicio do conteudo -->
     <div class="row center">
-        <div class="col s12">
-            <h1>Cursos Concluídos</h1>
-        </div>
+        <h1>Cursos Concluídos</h1>
+        {% if courses and current_user.is_authenticated %} <a class="btn-floating btn-large waves-effect waves-light" href="{{ url_for('add_course') }}"><i class="material-icons">add</i></a>{% endif %}
     </div>
 
     {% if courses %}
-        <div class="row">
-            {% for course in courses %}
+    {% for course in courses %}
+            {% if loop.index % 2 != 0 %}
+                <div class="row courses">
+            {% endif %}
                 <div class="col m6">
                     <div class="card">
                         <div class="card-image waves-effect waves-block waves-light">
@@ -45,15 +46,10 @@
                         </div>
                     </div>
                 </div>
+            {% if loop.index % 2 == 0 or loop.last %}
+                </div>
+            {% endif %}
             {% endfor %}
-        </div>
-        <div class="row">
-            <div class="col s1 offset-s11">
-                {% if current_user.is_authenticated %}
-                    <a class="btn-floating btn-large waves-effect waves-light" href="{{ url_for('add_course') }}"><i class="material-icons">add</i></a>
-                {% endif %}
-            </div>
-        </div>
         {% else %}
             <div class="row center">
                 <h4>

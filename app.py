@@ -26,8 +26,6 @@ def add_course():
     title = 'Add Course'
     form = CourseForm()
     if form.validate_on_submit():
-        print(form.conclusion_date.data, type(form.conclusion_date.data))
-
         course = Course(
             title=form.title.data,
             image=form.image_link.data,
@@ -42,7 +40,6 @@ def add_course():
         flash('Course added in the database')
 
         return redirect(url_for('add_course'))
-    print(form.conclusion_date.data, type(form.conclusion_date.data))
     return render_template('course_form.html', title=title, form=form)
 
 
